@@ -1,0 +1,63 @@
+{
+	"format_version": "1.16.210",
+	"minecraft:entity": {
+		"description": {
+			"identifier": "sp:pewtercauldron",
+			"runtime_identifier": "minecraft:armor_stand",
+			"is_spawnable": true,
+			"is_summonable": true,
+			"is_experimental": false,
+			"scripts": {
+				"animate": [
+					"CauldronController"
+				]
+			},
+			"animations": {
+				"CauldronController": "controller.animation.cauldron.ingredientfinder",
+				"BrewAbomination": "animation.entity.cauldron.abomination"
+			}
+		},
+		"components": {
+			"minecraft:type_family": {
+				"family": ["armor_stand", "inanimate", "mob"]
+			},
+			"minecraft:collision_box": {
+				"width": 0.5,
+				"height": 1.975
+			},
+			"minecraft:health": {
+				"value": 600,
+				"max": 600
+			},
+			"minecraft:hurt_on_condition": {
+				"damage_conditions": [
+					{
+						"filters": {
+							"test": "in_lava",
+							"subject": "self",
+							"operator": "==",
+							"value": true
+						},
+						"cause": "lava",
+						"damage_per_tick": 4
+					}
+				]
+			},
+			"minecraft:knockback_resistance": {
+				"value": 1
+			},
+			"minecraft:loot": {
+				"table": "loot_tables/entities/armor_stand.json"
+			},
+			"minecraft:nameable": {},
+			"minecraft:persistent": {},
+			"minecraft:physics": {},
+			"minecraft:pushable": {
+				"is_pushable": false,
+				"is_pushable_by_piston": true
+			},
+			"minecraft:conditional_bandwidth_optimization": {}
+		},
+		"events": {}
+	}
+}

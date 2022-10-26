@@ -1,0 +1,122 @@
+{
+	"format_version": "1.16.210",
+	"minecraft:entity": {
+		"description": {
+			"identifier": "sp:abominationtrapbaseentity",
+			"runtime_identifier": "minecraft:armor_stand",
+			"is_spawnable": true,
+			"is_summonable": true,
+			"is_experimental": false,
+			"scripts": {
+				"animate": [
+          			"GeneralProjectile",
+          			"AbominationGrab",
+          			"AbominationBubble"
+				]
+			},
+			"animations": {
+        		"AbominationGrab": "animation.spell.entity.abomination.trap.grab",
+        		"AbominationBubble":"animation.spell.entity.abomination.trap.blowbubble",
+        		"GeneralProjectile":"animation.spell.entity.general"
+			}
+		},
+		"component_groups": {
+			"puddle": {
+				"minecraft:variant": {
+					"value": 1
+				},
+        		"minecraft:type_family": {
+          			"family": [ "spellentity", "puddle" ]
+        		}
+			},
+      		"fist": {
+				"minecraft:variant": {
+					"value": 2
+				},
+        		"minecraft:type_family": {
+          			"family": [ "spellentity", "fist" ]
+        		}
+			},
+      		"bubble": {
+				"minecraft:variant": {
+					"value": 3
+				},
+        		"minecraft:type_family": {
+          			"family": [ "spellentity", "bubble" ]
+        		}
+			}
+		},
+		"components": {
+			"minecraft:type_family": {
+				"family": ["armor_stand", "inanimate", "mob"]
+			},
+			"minecraft:collision_box": {
+				"width": 1,
+				"height": 0.1
+			},
+			"minecraft:health": {
+				"value": 6,
+				"max": 6
+			},
+			"minecraft:hurt_on_condition": {
+				"damage_conditions": [
+					{
+						"filters": {
+							"test": "in_lava",
+							"subject": "self",
+							"operator": "==",
+							"value": true
+						},
+						"cause": "lava",
+						"damage_per_tick": 4
+					}
+				]
+			},
+			"minecraft:knockback_resistance": {
+				"value": 1
+			},
+			"minecraft:loot": {
+				"table": "loot_tables/entities/armor_stand.json"
+			},
+			"minecraft:nameable": {},
+			"minecraft:persistent": {},
+			"minecraft:physics": {},
+			"minecraft:pushable": {
+				"is_pushable": false,
+				"is_pushable_by_piston": true
+			},
+			"minecraft:conditional_bandwidth_optimization": {}
+		},
+		"events": {
+			"minecraft:entity_spawned": {
+					  "add": {
+						  "component_groups": ["puddle"]
+					  }
+				  },
+			"BecomeFist": {
+					  "remove": {
+						  "component_groups": ["puddle", "bubble"]
+					  },
+					  "add": {
+						  "component_groups": ["fist"]
+					  }
+				  },
+			"BecomePuddle": {
+					  "remove": {
+						  "component_groups": ["fist", "bubble"]
+					  },
+					  "add": {
+						  "component_groups": ["puddle"]
+					  }
+				  },
+			"BecomeBubble": {
+					  "remove": {
+						  "component_groups": ["puddle", "fist"]
+					  },
+					  "add": {
+						  "component_groups": ["bubble"]
+					  }
+				  }
+		  }
+	}
+}

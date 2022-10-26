@@ -1,0 +1,21 @@
+{
+    "format_version": "1.8.0",
+    "animations": {
+      "animation.plant.entity.poisongas": {
+        "loop": true,
+        "animation_length": 0.01,
+        "timeline": {
+          "0.0": [ "/particle sp:poisonplantgas ~ ~ ~"]
+        }
+      },
+      "animation.test_molang": {
+        "timeline": {
+          "0.0": "variable.pop_smoke = 1; variable.pop_bubbles = 0;",
+          "3.0": [
+            "variable.pop_smoke = 0;",
+            "variable.pop_bubbles = 1;"
+          ]
+        }
+      }
+    }
+  }

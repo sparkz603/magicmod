@@ -1,0 +1,215 @@
+{
+    "format_version": "1.8.0",
+    "animations": {
+      "animation.spell.entity.psionicbolt": {
+        "loop": true,
+        "animation_length": 0.01,
+        "timeline": {
+          "0.0": [ "/particle sp:psionicboltcoreentity ~ ~ ~", "/particle sp:psionicboltauraentity ~ ~ ~" ]
+        }
+      },
+      "animation.entity.psionic.lifetime": {
+        "loop": true,
+        "animation_length": 3.1,
+        "timeline": {
+          "3.0": [ "/kill @s"]
+        }
+      },
+      "animation.marker.psionic": {
+        "loop": true,
+        "animation_length": 0.01,
+        "timeline": {
+          "0.0": [ "/execute @e[tag=Player1TelekineticTarget] ~ ~ ~ particle sp:psionichovermark ~ ~1.8 ~"]
+        }
+      },
+      "animation.spell.entity.psionicpain": {
+        "loop": true,
+        "animation_length": 1,
+        "timeline": {
+          "0.0": [ "/execute @e[tag=Player1TelekineticTarget] ~ ~ ~ particle sp:psionicpain ~ ~1.8 ~", "/execute @e[tag=Player1TelekineticTarget] ~ ~ ~ effect @s nausea 10 255 true"],
+          "0.1": [ "/execute @e[tag=Player1TelekineticTarget] ~ ~ ~ particle sp:psionicpain ~ ~1.8 ~", "/execute @e[tag=Player1TelekineticTarget] ~ ~ ~ effect @s nausea 10 255 true"],
+          "0.2": [ "/execute @e[tag=Player1TelekineticTarget] ~ ~ ~ particle sp:psionicpain ~ ~1.8 ~", "/execute @e[tag=Player1TelekineticTarget] ~ ~ ~ effect @s nausea 10 255 true"],
+          "0.3": [ "/execute @e[tag=Player1TelekineticTarget] ~ ~ ~ particle sp:psionicpain ~ ~1.8 ~", "/execute @e[tag=Player1TelekineticTarget] ~ ~ ~ effect @s nausea 10 255 true"],
+          "0.4": [ "/execute @e[tag=Player1TelekineticTarget] ~ ~ ~ particle sp:psionicpain ~ ~1.8 ~", "/execute @e[tag=Player1TelekineticTarget] ~ ~ ~ effect @s nausea 10 255 true"],
+          "0.5": [ "/execute @e[tag=Player1TelekineticTarget] ~ ~ ~ particle sp:psionicpain ~ ~1.8 ~", "/execute @e[tag=Player1TelekineticTarget] ~ ~ ~ effect @s nausea 10 255 true"],
+          "0.6": [ "/execute @e[tag=Player1TelekineticTarget] ~ ~ ~ particle sp:psionicpain ~ ~1.8 ~", "/execute @e[tag=Player1TelekineticTarget] ~ ~ ~ effect @s nausea 10 255 true"],
+          "0.7": [ "/execute @e[tag=Player1TelekineticTarget] ~ ~ ~ particle sp:psionicpain ~ ~1.8 ~", "/execute @e[tag=Player1TelekineticTarget] ~ ~ ~ effect @s nausea 10 255 true"],
+          "0.8": [ "/execute @e[tag=Player1TelekineticTarget] ~ ~ ~ particle sp:psionicpain ~ ~1.8 ~", "/execute @e[tag=Player1TelekineticTarget] ~ ~ ~ effect @s nausea 10 255 true"],
+          "0.9": [ "/execute @e[tag=Player1TelekineticTarget] ~ ~ ~ particle sp:psionicpain ~ ~1.8 ~", "/execute @e[tag=Player1TelekineticTarget] ~ ~ ~ effect @s nausea 10 255 true"],
+          "0.99": [ "/execute @e[tag=Player1] ~ ~ ~ execute @e[tag=Player1TelekineticTarget,type=!item] ~ ~ ~ damage @s 3 magic entity @p[tag=Player1]"]
+        }
+      },
+      "animation.spell.entity.illusioncloud": {
+        "loop": true,
+        "animation_length": 0.01,
+        "timeline": {
+          "0.0": [ "/particle sp:illusionsmoke ~ ~ ~" ]
+        }
+      },
+      "animation.staff.spell.entity.psionicbolt": {
+        "loop": true,
+        "animation_length": 0.01,
+        "timeline": {
+          "0.0": [ "/particle sp:psionicstaffcirclesteadyaura ~ ~ ~"]
+        }
+      },
+      "animation.spell.entity.psionicmarker.marking": {
+        "loop": true,
+        "animation_length": 0.01,
+        "timeline": {
+          "0.0": [ "/function spells/psychic/sleep", "/function spells/psychic/telekineticpush", "/function spells/psychic/psionicmarkerplayer", "/function spells/psychic/psionicmarker" ]
+        }
+      },
+      "animation.spell.player.psionic.telekineticpull": {
+        "loop": true,
+        "animation_length": 0.01,
+        "timeline": {
+          "0.0": [ "/function spells/psychic/telekineticpull" ]
+        }
+      },
+      "animation.spell.player.psionic.levitation.activate.transition": {
+        "loop": true,
+        "animation_length": 2.1,
+        "timeline": {
+          "0.0": [  "/function spells/psychic/levitateothers", "/function spells/psychic/levitation","/tag @s[tag=LevitationTransitionActivate] add CONTINUELEVITATION", "/execute @s[tag=ActiveLevitation] ~ ~ ~ playanimation @s animation.humanoid.psionic.levitation.idle" ],
+          "0.1": [  "/function spells/psychic/levitateothers" ],
+          "0.2": [  "/function spells/psychic/levitateothers" ],
+          "0.3": [  "/function spells/psychic/levitateothers" ],
+          "0.4": [  "/function spells/psychic/levitateothers" ],
+          "0.5": [  "/function spells/psychic/levitateothers" ],
+          "0.6": [  "/function spells/psychic/levitateothers" ],
+          "0.7": [  "/function spells/psychic/levitateothers" ],
+          "0.8": [  "/function spells/psychic/levitateothers" ],
+          "0.9": [  "/function spells/psychic/levitateothers" ],
+          "1.0": [ "/execute @s[tag=ActiveLevitation] ~ ~ ~ playanimation @s animation.humanoid.psionic.levitation.idle" ],
+          "1.1": [  "/function spells/psychic/levitateothers" ],
+          "1.2": [  "/function spells/psychic/levitateothers" ],
+          "1.3": [  "/function spells/psychic/levitateothers" ],
+          "1.4": [  "/function spells/psychic/levitateothers" ],
+          "1.5": [  "/function spells/psychic/levitateothers" ],
+          "1.6": [  "/function spells/psychic/levitateothers" ],
+          "1.7": [  "/function spells/psychic/levitateothers" ],
+          "1.8": [  "/function spells/psychic/levitateothers" ],
+          "1.9": [  "/function spells/psychic/levitateothers" ],
+          "2.0": [ "/effect @s[tag=ActiveLevitation] levitation 0 0 true","/function spells/psychic/levitation", "/tag @s[tag=CONTINUELEVITATION] add ActiveLevitation", "/tag @s[tag=ActiveLevitation] remove LevitationTransitionActivate", "/tag @s[tag=ActiveLevitation] remove CONTINUELEVITATION", "/execute @s[tag=ActiveLevitation] ~ ~ ~ playanimation @s animation.humanoid.psionic.levitation.idle" ]
+        }
+      },
+      "animation.spell.player.psionic.levitation.activate.movement": {
+        "loop": true,
+        "animation_length": 1,
+        "timeline": {
+          "0.0": [ "/execute @s[tag=ActiveLevitation,tag=LevitationMovement] ~ ~ ~ playanimation @s animation.humanoid.psionic.levitation.move" ],
+          "0.99": [ "/execute @s[tag=ActiveLevitation,tag=LevitationMovement] ~ ~ ~ playanimation @s animation.humanoid.psionic.levitation.move" ]
+        }
+      },
+      "animation.spell.player.psionic.bolt.charge": {
+        "loop": true,
+        "animation_length": 4.2,
+        "timeline": {
+          "0.0": [ "/execute @s[tag=BeginPsionicCharge] ~ ~ ~ tag @s add ContinueCharge", "/execute @s[tag=ContinueCharge] ~ ~ ~ tag @s remove BeginPsionicCharge" ],
+          "1.5": [ "/execute @s[tag=ContinueCharge] ~ ~ ~ playanimation @s animation.humanoid.psionic.hand.bolt.charge.powerup" ],
+          "4.1": [ "/execute @s[tag=ContinueCharge] ~ ~ ~ tag @s add FinishedCharge", "/execute @s[tag=FinishedCharge] ~ ~ ~ tag @s remove ContinueCharge" ]
+        }
+      },
+      "animation.spell.player.psionic.shield.projection": {
+        "loop": true,
+        "animation_length": 4.1,
+        "timeline": {
+          "0.0": [ "/execute @s[tag=ContinueShieldProjection] ~ ~ ~ playanimation @s animation.humanoid.psionic.shield.continuous" ],
+          "1.0": [ "/execute @s[tag=ContinueShieldProjection] ~ ~ ~ tag @s remove BeginShieldProjection", "/execute @s[tag=BeginShieldProjection] ~ ~ ~ particle sp:psionicshieldproject ~ ~1.5 ~", "/execute @s[tag=ContinueShieldProjection] ~ ~ ~ playanimation @s animation.humanoid.psionic.shield.continuous" ],
+          "1.5": [ "/execute @s[tag=BeginShieldProjection] ~ ~ ~ particle sp:psionicshield ~ ~ ~" ],
+          "2.0": [ "/execute @s[tag=BeginShieldProjection] ~ ~ ~ particle sp:psionicshield ~ ~ ~","/execute @s[tag=ContinueShieldProjection] ~ ~ ~ playanimation @s animation.humanoid.psionic.shield.continuous" ],
+          "3.0": [ "/execute @s[tag=ContinueShieldProjection] ~ ~ ~ playanimation @s animation.humanoid.psionic.shield.continuous", "/execute @s[tag=BeginShieldProjection] ~ ~ ~ tag @s add ContinueShieldProjection" ],
+          "4.0": [ "/execute @s[tag=ContinueShieldProjection] ~ ~ ~ playanimation @s animation.humanoid.psionic.shield.continuous" ]
+        }
+      },
+      "animation.spell.player.psionic.shield.blockage": {
+        "loop": true,
+        "animation_length": 0.1,
+        "timeline": {
+          "0.0": [ "/function spells/psychic/shield" ]
+        }
+      },
+      "animation.spell.player.psionic.beam.attack": {
+        "loop": true,
+        "animation_length": 0.5,
+        "timeline": {
+          "0.0": [ "/function spells/psychic/beam" ]
+        }
+      },
+      "animation.spell.entity.psionic.beam": {
+        "loop": true,
+        "animation_length": 0.1,
+        "timeline": {
+          "0.0": [ "/function spells/psychic/projectilemovement", "/execute @s ~ ~ ~ tp @s ^ ^ ^0.1" ]
+        }
+      },
+      "animation.spell.entity.target.sleep": {
+        "loop": true,
+        "animation_length": 1.1,
+        "timeline": {
+          "0.0": [ "" ],
+          "1.0": [ "/execute @e[tag=PsychicSleeping] ~ ~ ~ tag @s add StartSleeping"]
+        }
+      },
+      "animation.spell.entity.target.sleeping": {
+        "loop": true,
+        "animation_length": 0.1,
+        "timeline": {
+          "0.0": [ "/execute @e[tag=StartSleeping] ~ ~ ~ execute @s[tag=PsychicSleeping] ~ ~ ~ playanimation @s animation.psionic.target.sleeping", "/effect @e[tag=StartSleeping] weakness 5 20 true", "/effect @e[tag=StartSleeping] slowness 5 20 true"]
+        }
+      },
+      "animation.spell.psionic.createillusion": {
+        "loop": true,
+        "animation_length": 1.5,
+        "timeline": {
+          "0.0": [ "/function spells/psychic/psionicillusions" ]
+        }
+      },
+      "animation.spell.psionic.createsmoke": {
+        "loop": true,
+        "animation_length": 0.1,
+        "timeline": {
+          "0.0": [ 
+            "/execute @p[tag=CreateIllusion,tag=CreateSmokeIllusion] ~ ~ ~  particle sp:illusionsmoke ^ ^1.4 ^5",
+            "/execute @p[tag=CreateIllusion,tag=CreateSmokeIllusion] ~ ~ ~  particle sp:illusionsmoke ^ ^1.4 ^4",
+            "/execute @p[tag=CreateIllusion,tag=CreateSmokeIllusion] ~ ~ ~  particle sp:illusionsmoke ^ ^1.4 ^3",
+            "/execute @p[tag=CreateIllusion,tag=CreateSmokeIllusion] ~ ~ ~  particle sp:illusionsmoke ^ ^1.4 ^2",
+            "/execute @p[tag=CreateIllusion,tag=CreateSmokeIllusion] ~ ~ ~  particle sp:illusionsmoke ^ ^1.4 ^1",
+            "/execute @p[tag=CreateIllusion,tag=CreateSmokeIllusion] ~ ~ ~  particle sp:illusionsmoke ^ ^1.4 ^"
+           ]
+        }
+      },
+      "animation.spell.psionic.illusion.poof": {
+        "loop": true,
+        "animation_length": 0.1,
+        "timeline": {
+          "0.0": [ "/execute @p[tag=CreateIllusion,tag=!CreateSmokeIllusion] ~ ~ ~ particle sp:illusionpoof ^ ^1.4 ^5" ]
+        }
+      },
+      "animation.staff.player.psionic.levitation": {
+        "loop": true,
+        "animation_length": 2.1,
+        "timeline": {
+          "0.0": ["/function spells/psychic/levitation" ],
+          "2.0": [ "/function spells/psychic/levitation" ]
+        }
+      },
+      "animation.staff.player.psionic.levitation.charge": {
+        "loop": true,
+        "animation_length": 0.01,
+        "timeline": {
+          "0.0": ["/tp @s ^ ^ ^0.9 true" ]
+        }
+      },
+      "animation.test_molang": {
+        "timeline": {
+          "0.0": "variable.pop_smoke = 1; variable.pop_bubbles = 0;",
+          "3.0": [
+            "variable.pop_smoke = 0;",
+            "variable.pop_bubbles = 1;"
+          ]
+        }
+      }
+    }
+  }

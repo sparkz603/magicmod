@@ -1,0 +1,6 @@
+give @p[tag=!AbominationFlowManipulationLowCharge,tag=!AbominationFlowManipulationMediumCharge,tag=!AbominationFlowManipulationHighCharge,tag=!AbominationFlowManipulationMaxCharge] sp:ammostaffabominationflowmanipulationss 2
+
+give @p[tag=AbominationFlowManipulationLowCharge] sp:ammostaffabominationblast1 2
+give @p[tag=AbominationFlowManipulationMediumCharge] sp:ammostaffabominationblast2 2
+give @p[tag=AbominationFlowManipulationHighCharge] sp:ammostaffabominationblast3 2
+give @p[tag=AbominationFlowManipulationMaxCharge] sp:ammostaffabominationblast4 2

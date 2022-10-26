@@ -1,0 +1,42 @@
+{
+	"format_version": "1.16.100",
+	"minecraft:item": {
+		"description": {
+			"identifier": "sp:aggressionwand"
+		},
+		"components": {
+			"minecraft:max_stack_size": 16,
+			"minecraft:throwable": {
+				"do_swing_animation": true
+			},
+			"minecraft:projectile": {
+				"projectile_entity": "minecraft:arrow"
+			},
+			"minecraft:display_name": {
+				"value": "Wand Of Agression"
+			},
+			"minecraft:allow_off_hand": true,
+			"minecraft:icon": {
+				"texture": "stick"
+			},
+			"minecraft:on_use": {
+				"on_use": {
+					"event": "castspell"
+				}
+			}
+		},
+		"events": {
+			"castspell": {
+				"sequence": [
+					{
+						"run_command": {
+							"command": [
+								"tell @s Spell has been Casted"
+							]
+						}
+					}
+				]
+			}
+		}
+	}
+}

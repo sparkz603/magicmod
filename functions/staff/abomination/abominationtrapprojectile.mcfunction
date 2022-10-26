@@ -1,0 +1,2 @@
+execute as @e[tag=Player1AbominationMarker] run execute as @e[r=5, rm=1,tag=!CLAIMED,type=sp:abominationtrapbaseentity] positioned  ~ ~ ~ run tag @s add Player1AbominationPuddle
+execute as @e[tag=Player1AbominationMarker] run execute as @e[r=5, rm=1,tag=Player1AbominationPuddle,type=sp:abominationtrapbaseentity] positioned ~ ~ ~ run tag @s add CLAIMED

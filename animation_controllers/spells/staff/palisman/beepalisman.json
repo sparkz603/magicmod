@@ -1,0 +1,33 @@
+{
+	"format_version": "1.10.0",
+	"animation_controllers": {
+    "controller.animation.palisman.bee.fly.controll": {
+      "states": {
+        "default": {
+          "transitions": [ { "Fly":"query.has_rider && !query.is_on_ground && query.is_moving" } ],
+          "on_entry": [ "/effect @s slow_falling 0 0 true" ]
+          
+        },
+        "Fly": {
+          "transitions": [ 
+            {"default":"query.has_rider && query.is_on_ground"},
+            {"default":"!query.has_rider"},
+            {"Hover":"!query.is_moving"}
+           ],
+          "animations": [ "flight"],
+          "on_entry": [ "/effect @s slow_falling 10000 255 true" ],
+          "on_exit": [ "/tell @p Stop Flying" ]
+        },
+        "Hover": {
+          "transitions": [ 
+            {"default":"query.has_rider && query.is_on_ground"},
+            {"Fly":"query.is_moving"}
+           ],
+          "animations": [ "flight"],
+          "on_entry": [ "/effect @s slow_falling 10000 255 true", "/tag @s add HoverPalisman" ],
+          "on_exit": [ "/tell @p Stop Flying", "/tag @s remove HoverPalisman" ]
+        }
+      }
+    }
+  }
+}

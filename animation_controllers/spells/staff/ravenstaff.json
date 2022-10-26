@@ -1,0 +1,296 @@
+{
+	"format_version": "1.10.0",
+	"animation_controllers": {
+    "controller.animation.palismanstaff.raven": {
+      "states": {
+        "default": {
+          "transitions": [ 
+            { 
+              "OnStaff":"query.get_equipped_item_name == 'ravenpalismanstaff' "
+            },
+            { 
+              "OffStaff":"query.get_equipped_item_name == 'ravenpalismanstaffinactive' "
+            }
+         ]
+        },
+        "OffStaff": {
+          "transitions": [ 
+            {"RecallPalisman":"query.get_equipped_item_name == 'ravenpalismanstaffinactive' && query.is_sneaking && query.get_equipped_item_name('off_hand') == '' && query.item_remaining_use_duration > 0.0"},
+            {"default":"query.get_equipped_item_name == '' "}
+           ],
+          "animations": [ ""],
+          "on_entry": [ "" ],
+          "on_exit": [ "" ]
+        },
+        "RecallPalisman": {
+          "transitions": [ 
+            {"OnStaff":"query.get_equipped_item_name == 'ravenpalismanstaff' && !query.is_sneaking"},
+            {"default":"query.get_equipped_item_name == '' "}
+        ],
+          "animations": [ ""],
+          "on_entry": [ 
+            "/function palisman/recallpalisman",
+            "/replaceitem entity @s slot.weapon.mainhand 0 sp:ravenpalismanstaff"
+          ],
+          "on_exit": [ "" ]
+        },
+        "OnStaff": {
+          "transitions": [ 
+            {"ProjectPalisman":"query.get_equipped_item_name == 'ravenpalismanstaff' && query.is_sneaking && query.get_equipped_item_name('off_hand') == '' && query.item_remaining_use_duration > 0.0"},
+            {"OpenStaffMenu":"query.get_equipped_item_name == 'ravenpalismanstaff' && !query.is_sneaking && query.get_equipped_item_name('off_hand') == '' && query.item_remaining_use_duration > 1.0 "},
+            {"default":"query.get_equipped_item_name == '' "}
+          ],
+          "animations": [ ""],
+          "on_entry": [ "/replaceitem entity @s slot.weapon.mainhand 0 sp:ravenpalismanstaff" ],
+          "on_exit": [ "" ]
+        },
+        "ProjectPalisman": {
+          "transitions": [ 
+            {"OffStaff":"query.get_equipped_item_name == 'ravenpalismanstaffinactive' && !query.is_sneaking"},
+            {"default":"query.get_equipped_item_name == '' "}
+         ],
+          "animations": [ "ProjectPalisman"],
+          "on_entry": [ "/tag @s add BeginPalismanProjection" ],
+          "on_exit": [ "/tag @s remove BeginPalismanProjection" ]
+        },
+        "OpenStaffMenu": {
+          "transitions": [ 
+            {"OnStaff":"query.get_equipped_item_name == 'ravenpalismanstaff' && !query.is_sneaking && query.get_equipped_item_name('off_hand') == '' && !query.item_remaining_use_duration > 0.0"},
+            {"default":"query.get_equipped_item_name == '' "}
+          ],
+          "animations": [ ""],
+          "on_entry": [
+            "/kill @e[type=npc,tag=StaffMenuNPC]",
+						"/summon npc ~ ~ ~",
+						"/tag @e[type=npc,r=5] add StaffMenuNPC",  
+            "/dialogue open @e[tag=StaffMenuNPC] @s staffscreenmain"
+          ],
+          "on_exit": [ "/dialogue open @e[tag=StaffMenuNPC] @s staffscreenmain" ]
+        }
+      }
+    },
+    "controller.animation.palismanstaff.raven.castspell.psionic": {
+      "states": {
+        "default": {
+          "transitions": [  
+            { "PsionicBolt":"query.get_equipped_item_name('main_hand') == 'ravenpalismanstaff' && query.get_equipped_item_name('off_hand') == 'staffpsionicboltload' " },
+            { "TelekinesisPull":"query.get_equipped_item_name('main_hand') == 'ravenpalismanstaff' && query.get_equipped_item_name('off_hand') == 'staffpsionictelekinesisload' " },
+            { "PsionicShield":"query.get_equipped_item_name('main_hand') == 'ravenpalismanstaff' && query.get_equipped_item_name('off_hand') == 'staffpsionicshieldload' " },
+            { "SleepInducement":"query.get_equipped_item_name('main_hand') == 'ravenpalismanstaff' && query.get_equipped_item_name('off_hand') == 'staffpsionicsleepload' " },
+            { "Levitation":"query.get_equipped_item_name('main_hand') == 'ravenpalismanstaff' && query.get_equipped_item_name('off_hand') == 'staffpsioniclevitationload' && !query.is_on_ground " },
+            { "PsionicBeam":"query.get_equipped_item_name('main_hand') == 'ravenpalismanstaff' && query.get_equipped_item_name('off_hand') == 'staffpsionicbeamload' " }
+          ],
+          "on_entry": [ "" ]
+          
+        },
+        "clearspellslot": {
+          "transitions": [ 
+            { "default":"query.get_equipped_item_name('main_hand') == 'ravenpalismanstaff' && query.get_equipped_item_name('off_hand') == '' && !query.is_sneaking && !query.is_jumping " }
+          ],
+          "on_entry": [ "/replaceitem entity @s slot.weapon.offhand 1 air" ]
+          
+        },
+        "PsionicBolt": {
+          "transitions": [ 
+            {"default":"query.get_equipped_item_name('off_hand') == '' "},
+            {"default":"query.get_equipped_item_name('main_hand') == '' "},
+            { "Levitation":"query.get_equipped_item_name('main_hand') == 'ravenpalismanstaff' && query.get_equipped_item_name('off_hand') == 'staffpsioniclevitationload' && !query.is_on_ground " },
+            {"LevitationLower":"query.get_equipped_item_name('main_hand') == 'ravenpalismanstaff' && query.get_equipped_item_name('off_hand') == 'staffpsionicboltload' && query.is_sneaking"},
+            {"clearspellslot":"query.get_equipped_item_name('main_hand') == 'ravenpalismanstaff' && query.get_equipped_item_name('off_hand') != '' && query.is_sneaking && query.is_jumping" },
+            {"PsionicShield":"query.get_equipped_item_name('main_hand') == 'ravenpalismanstaff' && query.get_equipped_item_name('off_hand') == 'staffpsionicshieldload' " },
+            {"PsionicBoltReload":"query.get_equipped_item_name('main_hand') == 'ravenpalismanstaff' && query.get_equipped_item_name('off_hand') == 'staffpsionicboltload' && query.item_remaining_use_duration > 0.0"}
+          ],
+          "animations": [ "StaffLevitation" ],
+          "on_entry": [ "/tell @p Psionic Bolt Loaded Up" ],
+          "on_exit": [ "" ]
+        },
+        "PreventLevitation": {
+          "transitions": [ 
+            {"default":"query.get_equipped_item_name('off_hand') == '' "},
+            {"default":"query.get_equipped_item_name('main_hand') == '' "},
+            { "PsionicBolt":"query.get_equipped_item_name('main_hand') == 'ravenpalismanstaff' && query.get_equipped_item_name('off_hand') == 'staffpsionicboltload' && query.is_on_ground " }
+          ],
+          "animations": [ "" ],
+          "on_entry": [ "/tag @s remove ActiveLevitation" ],
+          "on_exit": [ "" ]
+        },
+        "PsionicBoltReload": {
+          "transitions": [ 
+            {"default":"query.get_equipped_item_name('off_hand') == '' "},
+            {"default":"query.get_equipped_item_name('main_hand') == '' "},
+            {"clearspellslot":"query.get_equipped_item_name('main_hand') == 'ravenpalismanstaff' && query.get_equipped_item_name('off_hand') != '' && query.is_sneaking && query.is_jumping" },
+            {"PsionicBolt":"query.get_equipped_item_name('main_hand') == 'ravenpalismanstaff' && query.get_equipped_item_name('off_hand') == 'staffpsionicboltload' && !query.item_remaining_use_duration > 0.0"}
+          ],
+          "animations": [ "StaffLevitation" ],
+          "on_entry": [ "/tell @p Psionic Bolt Reloaded", "/give @p sp:staffpsionicboltammo 2" ],
+          "on_exit": [ "" ]
+        },
+        "TelekinesisPull": {
+          "transitions": [ 
+            {"default":"query.get_equipped_item_name('off_hand') == '' "},
+            {"default":"query.get_equipped_item_name('main_hand') == '' "},
+            {"clearspellslot":"query.get_equipped_item_name('main_hand') == 'ravenpalismanstaff' && query.get_equipped_item_name('off_hand') != '' && query.is_sneaking && query.is_jumping" },
+            { "TelekinesisPush":"query.get_equipped_item_name('main_hand') == 'ravenpalismanstaff' && query.get_equipped_item_name('off_hand') == 'staffpsionictelekinesisload' && query.is_sneaking" },
+            {"TelekinesisReload":"query.get_equipped_item_name('main_hand') == 'ravenpalismanstaff' && query.get_equipped_item_name('off_hand') == 'staffpsionictelekinesisload' && query.item_remaining_use_duration > 0.0"}
+          ],
+          "animations": [ "PsionicMarker","PsionicTelekinesisPull" ],
+          "on_entry": [ "/tell @p Psionic Bolt Loaded Up" ],
+          "on_exit": [ "" ]
+        },
+        "TelekinesisPush": {
+          "transitions": [ 
+            {"default":"query.get_equipped_item_name('off_hand') == '' "},
+            {"default":"query.get_equipped_item_name('main_hand') == '' "},
+            {"clearspellslot":"query.get_equipped_item_name('main_hand') == 'ravenpalismanstaff' && query.get_equipped_item_name('off_hand') != '' && query.is_sneaking && query.is_jumping" },
+            { "TelekinesisPull":"query.get_equipped_item_name('main_hand') == 'ravenpalismanstaff' && query.get_equipped_item_name('off_hand') == 'staffpsionictelekinesisload' && !query.is_sneaking " },
+            {"TelekinesisReload":"query.get_equipped_item_name('main_hand') == 'ravenpalismanstaff' && query.get_equipped_item_name('off_hand') == 'staffpsionictelekinesisload' && query.item_remaining_use_duration > 0.0"}
+          ],
+          "animations": [ "PsionicMarker"],
+          "on_entry": [ "/tag @s add TKPush", "/tell @p Psionic Bolt Loaded Up" ],
+          "on_exit": [ "/tag @s remove TKPush" ]
+        },
+        "TelekinesisReload": {
+          "transitions": [ 
+            {"default":"query.get_equipped_item_name('off_hand') == '' "},
+            {"default":"query.get_equipped_item_name('main_hand') == '' "},
+            {"clearspellslot":"query.get_equipped_item_name('main_hand') == 'ravenpalismanstaff' && query.get_equipped_item_name('off_hand') != '' && query.is_sneaking && query.is_jumping" },
+            {"TelekinesisPull":"query.get_equipped_item_name('main_hand') == 'ravenpalismanstaff' && query.get_equipped_item_name('off_hand') == 'staffpsionictelekinesisload' && !query.item_remaining_use_duration > 0.0 && !query.is_sneaking"},
+            {"TelekinesisPush":"query.get_equipped_item_name('main_hand') == 'ravenpalismanstaff' && query.get_equipped_item_name('off_hand') == 'staffpsionictelekinesisload' && !query.item_remaining_use_duration > 0.0 && query.is_sneaking"}
+          ],
+          "animations": [ "PsionicMarker","PsionicTelekinesisPull"],
+          "on_entry": [ "/tell @p Psionic Bolt Reloaded", "/give @p sp:staffpsionictelekinesisammo 2" ],
+          "on_exit": [ "" ]
+        },
+        "PsionicShield": {
+          "transitions": [ 
+            {"default":"query.get_equipped_item_name('off_hand') == '' "},
+            {"default":"query.get_equipped_item_name('main_hand') == '' "},
+            {"clearspellslot":"query.get_equipped_item_name('main_hand') == 'ravenpalismanstaff' && query.get_equipped_item_name('off_hand') != '' && query.is_sneaking && query.is_jumping" },
+            { "PsionicBolt":"query.get_equipped_item_name('main_hand') == 'ravenpalismanstaff' && query.get_equipped_item_name('off_hand') == 'staffpsionicboltload' " },
+            {"PsionicShieldActive":"query.get_equipped_item_name('main_hand') == 'ravenpalismanstaff' && query.get_equipped_item_name('off_hand') == 'staffpsionicshieldload' && query.is_sneaking"}
+          ],
+          "animations": [ ""],
+          "on_entry": [ "/tell @p Psionic Shield Loaded Up" ],
+          "on_exit": [ "" ]
+        },
+        "PsionicShieldActive": {
+          "transitions": [ 
+            {"default":"query.get_equipped_item_name('off_hand') == '' "},
+            {"default":"query.get_equipped_item_name('main_hand') == '' "},
+            {"clearspellslot":"query.get_equipped_item_name('main_hand') == 'ravenpalismanstaff' && query.get_equipped_item_name('off_hand') != '' && query.is_sneaking && query.is_jumping" },
+            {"PsionicShield":"query.get_equipped_item_name('main_hand') == 'ravenpalismanstaff' && query.get_equipped_item_name('off_hand') == 'staffpsionicshieldload' && !query.is_sneaking"}
+          ],
+          "animations": [ "StaffShield", "StaffShieldBlock"],
+          "on_entry": [ "/tag @s add BeginShieldProjection", "/tell @p Psionic Shield Up" ],
+          "on_exit": [ "/tell @p Psionic Shield Down" ]
+        },
+        "SleepInducement": {
+          "transitions": [ 
+            {"default":"query.get_equipped_item_name('off_hand') == '' "},
+            {"default":"query.get_equipped_item_name('main_hand') == '' "},
+            {"clearspellslot":"query.get_equipped_item_name('main_hand') == 'ravenpalismanstaff' && query.get_equipped_item_name('off_hand') != '' && query.is_sneaking && query.is_jumping" },
+            {"SleepInducementReload":"query.get_equipped_item_name('main_hand') == 'ravenpalismanstaff' && query.get_equipped_item_name('off_hand') == 'staffpsionicsleepload' && query.item_remaining_use_duration > 0.0"}
+          ],
+          "animations": [ ""],
+          "on_entry": [ "/tell @p Psionic Sleep Loaded Up" ],
+          "on_exit": [ "" ]
+        },
+        "SleepInducementReload": {
+          "transitions": [ 
+            {"default":"query.get_equipped_item_name('off_hand') == '' "},
+            {"default":"query.get_equipped_item_name('main_hand') == '' "},
+            {"clearspellslot":"query.get_equipped_item_name('main_hand') == 'ravenpalismanstaff' && query.get_equipped_item_name('off_hand') != '' && query.is_sneaking && query.is_jumping" },
+            {"SleepInducement":"query.get_equipped_item_name('main_hand') == 'ravenpalismanstaff' && query.get_equipped_item_name('off_hand') == 'staffpsionicsleepload' && !query.item_remaining_use_duration > 0.0"}
+          ],
+          "animations": [ ""],
+          "on_entry": [ "/tell @p Psionic Sleep Reloaded", "/give @p sp:staffpsionicsleepammo 2" ],
+          "on_exit": [ "" ]
+        },
+        "Levitation": {
+          "transitions": [ 
+            {"default":"query.get_equipped_item_name('off_hand') == '' "},
+            {"default":"query.get_equipped_item_name('main_hand') == '' "},
+            { "PsionicBolt":"query.get_equipped_item_name('main_hand') == 'ravenpalismanstaff' && query.get_equipped_item_name('off_hand') == 'staffpsionicboltload' " },
+            {"clearspellslot":"query.get_equipped_item_name('main_hand') == 'ravenpalismanstaff' && query.get_equipped_item_name('off_hand') != '' && query.is_sneaking && query.is_jumping" },
+            {"LevitationCharge":"query.get_equipped_item_name('main_hand') == 'ravenpalismanstaff' && query.get_equipped_item_name('off_hand') == 'staffpsioniclevitationload' && query.item_remaining_use_duration > 0.0"},
+            {"LevitationLower":"query.get_equipped_item_name('main_hand') == 'ravenpalismanstaff' && query.get_equipped_item_name('off_hand') == 'staffpsioniclevitationload' && query.is_sneaking"}
+          ],
+          "animations": [ "StaffLevitation"],
+          "on_entry": [ "/effect @s levitation 0 0","/tag @s add ActiveLevitation","/tell @p Psionic Sleep Loaded Up" ],
+          "on_exit": [ "" ]
+        },
+        "LevitationCharge": {
+          "transitions": [ 
+            {"default":"query.get_equipped_item_name('off_hand') == '' "},
+            {"default":"query.get_equipped_item_name('main_hand') == '' "},
+            { "PsionicBolt":"query.get_equipped_item_name('main_hand') == 'ravenpalismanstaff' && query.get_equipped_item_name('off_hand') == 'staffpsionicboltload' " },
+            {"clearspellslot":"query.get_equipped_item_name('main_hand') == 'ravenpalismanstaff' && query.get_equipped_item_name('off_hand') != '' && query.is_sneaking && query.is_jumping" },
+            {"Levitation":"query.get_equipped_item_name('main_hand') == 'ravenpalismanstaff' && query.get_equipped_item_name('off_hand') == 'staffpsioniclevitationload' && !query.item_remaining_use_duration > 0.0 && !query.is_on_ground"}
+          ],
+          "animations": [ "StaffLevitationCharge"],
+          "on_entry": [ "/tag @s remove ActiveLevitation","/tell @p Psionic Sleep Loaded Up" ],
+          "on_exit": [ "" ]
+        },
+        "LevitationLower": {
+          "transitions": [ 
+            {"default":"query.get_equipped_item_name('off_hand') == '' "},
+            {"default":"query.get_equipped_item_name('main_hand') == '' "},
+            { "PreventLevitation":"query.get_equipped_item_name('main_hand') == 'ravenpalismanstaff' && query.get_equipped_item_name('off_hand') == 'staffpsionicboltload' && query.is_on_ground " },
+            { "LevitationTransition":"query.get_equipped_item_name('main_hand') == 'ravenpalismanstaff' && query.get_equipped_item_name('off_hand') == 'staffpsionicboltload' && !query.is_sneaking " },
+            {"clearspellslot":"query.get_equipped_item_name('main_hand') == 'ravenpalismanstaff' && query.get_equipped_item_name('off_hand') != '' && query.is_sneaking && query.is_jumping" },
+            {"Levitation":"query.get_equipped_item_name('main_hand') == 'ravenpalismanstaff' && query.get_equipped_item_name('off_hand') == 'staffpsioniclevitationload' && !query.is_sneaking && !query.is_on_ground"}
+          ],
+          "animations": [ "StaffLevitation"],
+          "on_entry": [ "/effect @s levitation 0 0", "/effect @s jump_boost 100 4 true", "/effect @s slow_falling 100 255 true", "/tag @s remove ActiveLevitation"],
+          "on_exit": [  "" ]
+        },
+        "LevitationTransition": {
+          "transitions": [ 
+            {"default":"query.get_equipped_item_name('off_hand') == '' "},
+            {"default":"query.get_equipped_item_name('main_hand') == '' "},
+            { "PsionicBolt":"query.get_equipped_item_name('main_hand') == 'ravenpalismanstaff' && query.get_equipped_item_name('off_hand') == 'staffpsionicboltload'" },
+            {"clearspellslot":"query.get_equipped_item_name('main_hand') == 'ravenpalismanstaff' && query.get_equipped_item_name('off_hand') != '' && query.is_sneaking && query.is_jumping" }
+          ],
+          "animations": [ "StaffLevitation"],
+          "on_entry": [ "/tag @s add ActiveLevitation" ],
+          "on_exit": [ "" ]
+        },
+        "PsionicBeam": {
+          "transitions": [ 
+            {"default":"query.get_equipped_item_name('off_hand') == '' "},
+            {"default":"query.get_equipped_item_name('main_hand') == '' "},
+            {"clearspellslot":"query.get_equipped_item_name('main_hand') == 'ravenpalismanstaff' && query.get_equipped_item_name('off_hand') != '' && query.is_sneaking && query.is_jumping" },
+            {"PsionicBeamReload":"query.get_equipped_item_name('main_hand') == 'ravenpalismanstaff' && query.get_equipped_item_name('off_hand') == 'staffpsionicbeamload' && query.item_remaining_use_duration > 0.0"},
+            {"PsionicBeamBlast":"query.get_equipped_item_name('main_hand') == 'ravenpalismanstaff' && query.get_equipped_item_name('off_hand') == 'staffpsionicbeamload' && query.is_sneaking && query.item_remaining_use_duration > 0.0"}
+          ],
+          "animations": [ ""],
+          "on_entry": [ "/tell @p Psionic Beam Loaded Up" ],
+          "on_exit": [ "" ]
+        },
+        "PsionicBeamReload": {
+          "transitions": [ 
+            {"default":"query.get_equipped_item_name('off_hand') == '' "},
+            {"default":"query.get_equipped_item_name('main_hand') == '' "},
+            {"clearspellslot":"query.get_equipped_item_name('main_hand') == 'ravenpalismanstaff' && query.get_equipped_item_name('off_hand') != '' && query.is_sneaking && query.is_jumping" },
+            {"PsionicBeam":"query.get_equipped_item_name('main_hand') == 'ravenpalismanstaff' && query.get_equipped_item_name('off_hand') == 'staffpsionicbeamload' && !query.item_remaining_use_duration > 0.0"},
+            {"PsionicBeamBlast":"query.get_equipped_item_name('main_hand') == 'ravenpalismanstaff' && query.get_equipped_item_name('off_hand') == 'staffpsionicbeamload' && query.is_sneaking"}
+          ],
+          "animations": [ ""],
+          "on_entry": [ "/tell @p Psionic Beam Reloaded", "/give @p sp:staffpsionicbeamammo 2" ],
+          "on_exit": [ "" ]
+        },
+        "PsionicBeamBlast": {
+          "transitions": [ 
+            {"default":"query.get_equipped_item_name('off_hand') == '' "},
+            {"default":"query.get_equipped_item_name('main_hand') == '' "},
+            {"clearspellslot":"query.get_equipped_item_name('main_hand') == 'ravenpalismanstaff' && query.get_equipped_item_name('off_hand') != '' && query.is_sneaking && query.is_jumping" },
+            {"PsionicBeam":"query.get_equipped_item_name('main_hand') == 'ravenpalismanstaff' && query.get_equipped_item_name('off_hand') == 'staffpsionicbeamload' && !query.item_remaining_use_duration > 0.0"}
+          ],
+          "animations": [ "PsionicBeam", "PsionicMarker"],
+          "on_entry": [ "/tell @p Psionic Beam Target Locked " ],
+          "on_exit": [ "" ]
+        }
+      }
+    }
+  }
+}

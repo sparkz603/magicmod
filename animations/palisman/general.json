@@ -1,0 +1,50 @@
+{
+    "format_version": "1.8.0",
+    "animations": {
+      "animation.palisman.flight": {
+        "loop": true,
+        "animation_length": 1.47,
+        "timeline": {
+          "0.0": [ "/execute as @p[r=3] run execute as @e[tag=HoverPalisman,family=palisman] run effect @s levitation 1 1 true", "/execute as @p[r=3] run execute as @e[family=palisman] run effect @s speed 3 10 ", "/execute as @p[r=3,rxm=-10,rx=10] run execute as @e[family=palisman,tag=!HoverPalisman] run effect @s levitation 1 1 true", "/execute as @p[r=3,rxm=-90,rx=-11] run execute as @e[family=palisman,r=3,tag=!HoverPalisman] run effect @s levitation 2 4 true" ]
+        }
+      },
+      "animation.staff.player.psionic.shield.projection": {
+        "loop": true,
+        "animation_length": 4.1,
+        "timeline": {
+          "1.0": [ "/execute @s[tag=ContinueShieldProjection] ~ ~ ~ tag @s remove BeginShieldProjection", "/execute @s[tag=BeginShieldProjection] ~ ~ ~ particle sp:psionicshieldproject ~ ~1.5 ~" ],
+          "1.5": [ "/execute @s[tag=BeginShieldProjection] ~ ~ ~ particle sp:psionicshield ~ ~ ~" ],
+          "2.0": [ "/execute @s[tag=BeginShieldProjection] ~ ~ ~ particle sp:psionicshield ~ ~ ~" ],
+          "3.0": [ "/execute @s[tag=BeginShieldProjection] ~ ~ ~ tag @s add ContinueShieldProjection" ]
+        }
+      },
+      "animation.staff.player.psionic.shield.blockage": {
+        "loop": true,
+        "animation_length": 0.1,
+        "timeline": {
+          "0.0": [ "/function spells/psychic/shield" ]
+        }
+      },
+      "animation.staff.project.palisman": {
+        "loop": true,
+        "animation_length": 0.51,
+        "timeline": {
+          "0.5": [ 
+            "/execute @p[tag=BeginPalismanProjection] ~ ~ ~ function palisman/projectpalisman", 
+            "/execute @p[tag=BeginPalismanProjection] ~ ~ ~ function palisman/projectpalismanownerclaim", 
+            "/execute @p[tag=BeginPalismanProjection] ~ ~ ~ function palisman/dissipatestaff", 
+            "/execute @p[tag=BeginPalismanProjection] ~ ~ ~ give @p sp:palismantametoken"
+          ]
+        }
+      },
+      "animation.test_molang": {
+        "timeline": {
+          "0.0": "variable.pop_smoke = 1; variable.pop_bubbles = 0;",
+          "3.0": [
+            "variable.pop_smoke = 0;",
+            "variable.pop_bubbles = 1;"
+          ]
+        }
+      }
+    }
+  }

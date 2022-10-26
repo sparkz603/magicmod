@@ -1,0 +1,33 @@
+{
+	"format_version": "1.10.0",
+	"animation_controllers": {
+    "controller.animation.cauldron.ingredientfinder": {
+      "states": {
+        "default": {
+          "transitions": [  
+            { "Ignite":"query.is_on_fire" }
+          ],
+          "on_entry": [ "" ],
+          "on_exit": [ "/tell @p Cauldron has been ignited" ]
+          
+        },
+        "Ignite": {
+          "transitions": [
+            {"AbominationGoo":"query.get_equipped_item_name('main_hand') == 'slime_ball' "}
+          ],
+          "animations": [ "" ],
+          "on_entry": [ "" ],
+          "on_exit": [ "" ]
+        },
+        "AbominationGoo": {
+          "transitions": [
+            {"Ignite":"query.get_equipped_item_name('main_hand') != 'slime_ball' "}
+          ],
+          "animations": [ "BrewAbomination" ],
+          "on_entry": [ "/tag @s add BrewingAbominationGoo", "/tell @p Slime Ball added to Cauldron" ],
+          "on_exit": [ "/tag @s remove BrewingAbominationGoo", "/tell @p Slime Ball removed from Cauldron" ]
+        }
+      }
+    }
+  }
+}

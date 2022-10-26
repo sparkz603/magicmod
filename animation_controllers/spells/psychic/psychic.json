@@ -1,0 +1,171 @@
+{
+	"format_version": "1.10.0",
+	"animation_controllers": {
+    "controller.animation.psionic.psionicbolt": {
+      "states": {
+        "default": {
+          "transitions": [ { "Charge":"query.get_equipped_item_name == 'psionicbolt1' && query.is_sneaking" } ],
+          "on_exit": [ "/tell @p Begin Charge " ]
+        },
+        "Charge": {
+          "transitions": [ {"default":"!query.is_sneaking"} ],
+          "animations": [ "PsionicBoltCharge"],
+          "on_entry": [ "/execute @s ~ ~ ~ playanimation @s animation.humanoid.psionic.hand.bolt.charge.start", "/tag @s add BeginPsionicCharge" ],
+          "on_exit": [ "/tell @p Stop", "/tag @s remove ContinueCharge", "/tag @s remove FinishedCharge", "/tag @s remove BeginPsionicCharge" ]
+        }
+      }
+    },
+    "controller.animation.psionic.telekinesis": {
+      "states": {
+        "default": {
+          "transitions": [
+            { "Pull":"query.get_equipped_item_name == 'psionictelekinesis' && !query.is_sneaking" },
+            { "Push":"query.get_equipped_item_name == 'psionictelekinesis' && query.is_sneaking" },
+            { "Pull":"query.get_equipped_item_name == 'psionictelekinesisalt' && !query.is_sneaking" },
+            { "Push":"query.get_equipped_item_name == 'psionictelekinesisalt' && query.is_sneaking" }
+          ],
+          "animations": [ ""],
+          "on_exit": [ "" ]
+        },
+        "Pull": {
+          "transitions": [ 
+            {"default":"!query.is_sneaking"},
+            { "Push":"query.get_equipped_item_name == 'psionictelekinesis' && query.is_sneaking" },
+            { "Push":"query.get_equipped_item_name == 'psionictelekinesisalt' && query.is_sneaking" }
+          ],
+          "animations": [ "PsionicMarker","PsionicTelekinesisPull"],
+          "on_entry": [ "" ],
+          "on_exit": [ "" ]
+        },
+        "Push": {
+          "transitions": [ 
+            {"default":"!query.is_sneaking"},
+            { "Pull":"query.get_equipped_item_name == 'psionictelekinesis' && !query.is_sneaking" },
+            { "Pull":"query.get_equipped_item_name == 'psionictelekinesisalt' && !query.is_sneaking" }
+          ],
+          "animations": [ "PsionicMarker"],
+          "on_entry": [ "/tag @s add TKPush" ],
+          "on_exit": [ "/tell @p Stop", "/tag @s remove TKPush", "/function spells/psychic/killpsionicmarkers", "/function spells/psychic/removetelekinesismark" ]
+        }
+      }
+    },
+    "controller.animation.psionic.levitation": {
+      "states": {
+        "default": {
+          "transitions": [ { "Activate":"query.get_equipped_item_name == 'psioniclevitation' && !query.is_sneaking " } ],
+          "on_entry": [ "/tag @s remove ActiveLevitation", "/execute @s[tag=LevitationTransitionActivate] ~ ~ ~ playanimation @s animation.humanoid.psionic.levitation.deactivate" ]
+        },
+        "Activate": {
+          "transitions": [ {"default":"query.is_sneaking"} ],
+          "animations": [ "ActivateLevitation"],
+          "on_entry": [ "/tell @p Activate Levitation", "/execute @s[tag=LevitationTransitionActivate] ~ ~ ~ playanimation @s animation.humanoid.psionic.levitation.activate" ],
+          "on_exit": [ "/execute @s ~ ~ ~ playanimation @s animation.humanoid.psionic.levitation.deactivate", "/tag @s remove ActiveLevitation" ]
+        }
+      }
+    },
+    "controller.animation.psionic.shield": {
+      "states": {
+        "default": {
+          "transitions": [ { "Activate":"query.get_equipped_item_name == 'psionicshield' && query.is_sneaking " } ],
+          "on_entry": [ "/tag @s remove ActiveLevitation", "/execute @s[tag=LevitationTransitionActivate] ~ ~ ~ playanimation @s animation.humanoid.psionic.levitation.deactivate" ]
+        },
+        "Activate": {
+          "transitions": [ {"default":"!query.is_sneaking"} ],
+          "animations": [ "ActivateShield", "ShieldAnimation" ],
+          "on_entry": [ "/tell @p Activate Shield","/tag @s add BeginShieldProjection", "/execute @s ~ ~ ~ playanimation @s animation.humanoid.psionic.shield.project" ],
+          "on_exit": [ "/tag @s remove ContinueShieldProjection", "/tag @s remove BeginShieldProjection", "/execute @s ~ ~ ~ playanimation @s animation.humanoid.psionic.shield.lower" ]
+        }
+      }
+    },
+    "controller.animation.psionic.beam": {
+      "states": {
+        "default": {
+          "transitions": [ { "Activate":"query.get_equipped_item_name == 'psionicbeam' && query.is_sneaking " } ],
+          "on_entry": [ "/tag @s remove ActiveLevitation", "/execute @s[tag=LevitationTransitionActivate] ~ ~ ~ playanimation @s animation.humanoid.psionic.levitation.deactivate" ]
+        },
+        "Activate": {
+          "transitions": [ {"default":"!query.is_sneaking"} ],
+          "animations": [ "PsionicBeam", "PsionicMarker" ],
+          "on_entry": [ "/tell @p Activate Beam" ]
+        }
+      }
+    },
+    "controller.animation.psionic.target.sleep": {
+      "states": {
+        "default": {
+          "transitions": [ { "Activate":"query.is_stunned" } ]
+        },
+        "Activate": {
+          "transitions": [ {"default":"!query.is_stunned"} ],
+          "animations": [ "Sleep", "Sleeping" ],
+          "on_entry": [ "/tag @s add PsychicSleeping", "/execute @s[tag=PsychicSleeping] ~ ~ ~ playanimation @s animation.psionic.target.sleep" ],
+          "on_exit": [ "/tag @s remove PsychicSleeping", "/tag @s remove StartSleeping", "/execute @s ~ ~ ~ playanimation @s animation.psionic.target.awaken" ]
+        }
+      }
+    },
+    "controller.animation.psionic.cast.illusions": {
+      "initial_state": "default",
+      "states": {
+        "default": {
+          "transitions": [ { "ChooseIllusion":"query.get_equipped_item_name == 'psionicillusion' " } ],
+          "on_exit": [ "/give @p bread" ]
+        },
+        "ChooseIllusion": {
+          "transitions": [ 
+            {"default":"query.get_equipped_item_name == '' "},
+            { "HuskIllusion":"query.get_equipped_item_name == 'psionicillusion' && query.get_equipped_item_name('off_hand') == 'huskessence' " },
+            { "IllusionCloud":"query.get_equipped_item_name == 'psionicillusion' && query.get_equipped_item_name('off_hand') == '' " }
+          ],
+          "animations": [ "" ],
+          "on_entry": [ "/tell @p Illusion Chosen" ],
+          "on_exit": [ "/give @p apple" ]
+        },
+        "CreateIllusions": {
+          "transitions": [ 
+            {"default":"query.get_equipped_item_name == ' ' "},
+            {"IllusionCloud":"query.get_equipped_item_name == 'psionicillusion' && query.get_equipped_item_name('off_hand') == '' && !query.is_sneaking"},
+            {"HuskIllusion":"query.get_equipped_item_name == 'psionicillusion' && query.get_equipped_item_name('off_hand') == 'huskessence' && !query.is_sneaking"}
+          ],
+          "animations": [ "CreateIllusion","IllusionPoof", "CreateSmokeIllusion" ],
+          "on_entry": [ "/tag @s[tag=IllusionChosen] add CreateIllusion" ],
+          "on_exit": [ "/tag @s[tag=IllusionChosen] remove CreateIllusion", "/function spells/psychic/clearpsionicillusionstag" ]
+        },
+        "IllusionCloud": {
+          "transitions": [  
+          {"default":"query.get_equipped_item_name == ' ' "},  
+          {"CreateIllusions":"query.get_equipped_item_name == 'psionicillusion' && query.get_equipped_item_name('off_hand') == '' && query.is_sneaking"},
+          { "HuskIllusion":"query.get_equipped_item_name == 'psionicillusion' && query.get_equipped_item_name('off_hand') == 'huskessence' " }
+            
+          ],
+          "animations": [ "" ],
+          "on_entry": [ "/tell @p Smoke Illusion in Mind","/tag @s[tag=!IllusionChosen] add CreateSmokeIllusion", "/tag @s[tag=CreateSmokeIllusion] add IllusionChosen" ],
+          "on_exit": [ "" ]
+        },
+        "HuskIllusion": {
+          "transitions": [  
+          {"default":"query.get_equipped_item_name == ' ' "},  
+          {"CreateIllusions":"query.get_equipped_item_name == 'psionicillusion' && query.get_equipped_item_name('off_hand') == 'huskessence' && query.is_sneaking"},
+          {"IllusionCloud":"query.get_equipped_item_name == 'psionicillusion' && query.get_equipped_item_name('off_hand') == '' "}
+            
+          ],
+          "animations": [ "" ],
+          "on_entry": [ "/tell @p Husk Illusion in Mind","/tag @s[tag=!IllusionChosen] add CreateHuskIllusion", "/tag @s[tag=CreateHuskIllusion] add IllusionChosen" ],
+          "on_exit": [ "" ]
+        }
+      }
+    },
+    "controller.animation.psionic.inflict.pain": {
+      "states": {
+        "default": {
+          "transitions": [ { "Activate":"query.get_equipped_item_name == 'psionicpain' && query.is_sneaking " } ]
+        },
+        "Activate": {
+          "transitions": [ {"default":"!query.is_sneaking"} ],
+          "animations": [ "PsionicPain", "PsionicMarker" ],
+          "on_entry": [ "/tell @p Inflicting Pain" ],
+          "on_exit": [ "/function spells/psychic/removetelekinesismark" ]
+        }
+      }
+    }
+  }
+}

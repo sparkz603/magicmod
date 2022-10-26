@@ -1,0 +1,118 @@
+{
+	"format_version": "1.18.0",
+	"minecraft:item": {
+		"description": {
+			"identifier": "sp:catstaff"
+		},
+		"components": {
+			"minecraft:max_stack_size": 1,
+			"minecraft:throwable": {
+				"do_swing_animation": true
+			},
+			"minecraft:use_duration": 25,
+			"minecraft:shooter": {
+				"ammunition": [
+					{
+						"item": "sp:ammostaffabominationblast1",
+						"use_offhand": true,
+						"search_inventory": true,
+						"use_in_creative": true
+					},
+					{
+						"item": "sp:ammostaffabominationblast2",
+						"use_offhand": true,
+						"search_inventory": true,
+						"use_in_creative": true
+					},
+					{
+						"item": "sp:ammostaffabominationblast3",
+						"use_offhand": true,
+						"search_inventory": true,
+						"use_in_creative": true
+					},
+					{
+						"item": "sp:ammostaffabominationblast4",
+						"use_offhand": true,
+						"search_inventory": true,
+						"use_in_creative": true
+					},
+					{
+						"item": "sp:ammostaffabominationrise1",
+						"use_offhand": true,
+						"search_inventory": true,
+						"use_in_creative": true
+					},
+					{
+						"item": "sp:ammostaffabominationrise2",
+						"use_offhand": true,
+						"search_inventory": true,
+						"use_in_creative": true
+					},
+					{
+						"item": "sp:ammostaffabominationrise3",
+						"use_offhand": true,
+						"search_inventory": true,
+						"use_in_creative": true
+					},
+					{
+						"item": "sp:ammostaffabominationrise4",
+						"use_offhand": true,
+						"search_inventory": true,
+						"use_in_creative": true
+					},
+					{
+						"item": "sp:ammostaffabominationflowmanipulationss",
+						"use_offhand": true,
+						"search_inventory": true,
+						"use_in_creative": true
+					},
+					{
+						"item": "sp:ammostaffabominationspike1",
+						"use_offhand": true,
+						"search_inventory": true,
+						"use_in_creative": true
+					},
+					{
+						"item": "sp:ammostaffabominationspikewave1",
+						"use_offhand": true,
+						"search_inventory": true,
+						"use_in_creative": true
+					},
+					{
+						"item": "sp:ammostaffabominationtrap1",
+						"use_offhand": true,
+						"search_inventory": true,
+						"use_in_creative": true
+					} 
+				],
+				"max_draw_duration": 1,
+				"charge_on_draw": true
+			},
+			"minecraft:display_name": {
+				"value": "Cat Staff"
+			},
+			"minecraft:allow_off_hand": true,
+			"minecraft:icon": {
+				"texture": "stick"
+			},
+			"minecraft:on_use": {
+				"on_use": {
+					"event": "castspell"
+				}
+			}
+		},
+		"events": {
+			"castspell": {
+				"sequence": [
+					{
+						"run_command": {
+							"command": [
+								"tell @s Spell has been Casted"
+							]
+						}
+					}
+				]
+			}
+		}
+	}
+}

@@ -1,0 +1,227 @@
+{
+	"format_version": "1.10.0",
+	"animation_controllers": {
+    "controller.animation.catstaff.castspell.abomination": {
+      "states": {
+        "default": {
+          "transitions": [  
+            { "AbominationBlast":"query.get_equipped_item_name('main_hand') == 'catstaff' && query.get_equipped_item_name('off_hand') == 'loadstaffabominationblast' " },
+            { "AbominationRise":"query.get_equipped_item_name('main_hand') == 'catstaff' && query.get_equipped_item_name('off_hand') == 'loadstaffabominationrise' " },
+            { "AbominationFlowManipulation":"query.get_equipped_item_name('main_hand') == 'catstaff' && query.get_equipped_item_name('off_hand') == 'loadstaffabominationflowmanipulation' " },
+            { "AbominationShield":"query.get_equipped_item_name('main_hand') == 'catstaff' && query.get_equipped_item_name('off_hand') == 'loadstaffabominationshield' " },
+            { "AbominationSpike":"query.get_equipped_item_name('main_hand') == 'catstaff' && query.get_equipped_item_name('off_hand') == 'loadstaffabominationspike' " },
+            { "AbominationTrap":"query.get_equipped_item_name('main_hand') == 'catstaff' && query.get_equipped_item_name('off_hand') == 'loadstaffabominationtrap' " }
+          ],
+          "on_entry": [ "" ]
+          
+        },
+        "AbominationBlast": {
+          "transitions": [ 
+            {"default":"query.get_equipped_item_name('off_hand') == '' "},
+            {"default":"query.get_equipped_item_name('off_hand') != 'loadstaffabominationblast' "},
+            {"default":"query.get_equipped_item_name('main_hand') == '' "},
+            {"AbominationBlastReload":"query.get_equipped_item_name('main_hand') == 'catstaff' && query.get_equipped_item_name('off_hand') == 'loadstaffabominationblast' && query.item_remaining_use_duration > 0.0"},
+            {"AbominationBlastCharge":"query.get_equipped_item_name('main_hand') == 'catstaff' && query.get_equipped_item_name('off_hand') == 'loadstaffabominationblast' && query.is_sneaking"}
+          ],
+          "animations": [ "" ],
+          "on_entry": [ "/tell @p Abomination Blast Selected" ],
+          "on_exit": [ "" ]
+        },
+        "AbominationBlastReload": {
+          "transitions": [ 
+            {"default":"query.get_equipped_item_name('off_hand') == '' "},
+            {"default":"query.get_equipped_item_name('off_hand') != 'loadstaffabominationblast' "},
+            {"default":"query.get_equipped_item_name('main_hand') == '' "},
+            {"AbominationBlast":"query.get_equipped_item_name('main_hand') == 'catstaff' && query.get_equipped_item_name('off_hand') == 'loadstaffabominationblast' && !query.item_remaining_use_duration > 0.0"}
+          ],
+          "animations": [ "" ],
+          "on_entry": [ "/tell @p Casting Abomination Blast", "/function staff/abomination/abominationblast", "/function staff/abomination/abominationblastreset" ],
+          "on_exit": [ "" ]
+        },
+        "AbominationBlastCharge": {
+          "transitions": [ 
+            {"default":"query.get_equipped_item_name('off_hand') == '' "},
+            {"default":"query.get_equipped_item_name('off_hand') != 'loadstaffabominationblast' "},
+            {"default":"query.get_equipped_item_name('main_hand') == '' "},
+            {"AbominationBlastReload":"query.get_equipped_item_name('main_hand') == 'catstaff' && query.get_equipped_item_name('off_hand') == 'loadstaffabominationblast' && query.item_remaining_use_duration > 0.0"},
+            {"AbominationBlast":"query.get_equipped_item_name('main_hand') == 'catstaff' && query.get_equipped_item_name('off_hand') == 'loadstaffabominationblast' && !query.is_sneaking"}
+          ],
+          "animations": [ "AbominationBlastCharge" ],
+          "on_entry": [ "/tell @p Charging Abomination Blast","/tag @s add AbominationBlastLowCharge" ],
+          "on_exit": [ "" ]
+        },
+        "AbominationRise": {
+          "transitions": [ 
+            {"default":"query.get_equipped_item_name('off_hand') == '' "},
+            {"default":"query.get_equipped_item_name('off_hand') != 'loadstaffabominationrise' "},
+            {"default":"query.get_equipped_item_name('main_hand') == '' "},
+            {"AbominationRiseReload":"query.get_equipped_item_name('main_hand') == 'catstaff' && query.get_equipped_item_name('off_hand') == 'loadstaffabominationrise' && query.item_remaining_use_duration > 0.0"},
+            {"AbominationRiseCharge":"query.get_equipped_item_name('main_hand') == 'catstaff' && query.get_equipped_item_name('off_hand') == 'loadstaffabominationrise' && query.is_sneaking"}
+          ],
+          "animations": [ "" ],
+          "on_entry": [ "/tell @p Abomination Rise Selected" ],
+          "on_exit": [ "" ]
+        },
+        "AbominationRiseReload": {
+          "transitions": [ 
+            {"default":"query.get_equipped_item_name('off_hand') == '' "},
+            {"default":"query.get_equipped_item_name('off_hand') != 'loadstaffabominationrise' "},
+            {"default":"query.get_equipped_item_name('main_hand') == '' "},
+            {"AbominationRise":"query.get_equipped_item_name('main_hand') == 'catstaff' && query.get_equipped_item_name('off_hand') == 'loadstaffabominationrise' && !query.item_remaining_use_duration > 0.0"}
+          ],
+          "animations": [ "" ],
+          "on_entry": [ "/tell @p Casting Abomination Rise", "/function staff/abomination/abominationrise", "/function staff/abomination/abominationrisereset" ],
+          "on_exit": [ "" ]
+        },
+        "AbominationRiseCharge": {
+          "transitions": [ 
+            {"default":"query.get_equipped_item_name('off_hand') == '' "},
+            {"default":"query.get_equipped_item_name('off_hand') != 'loadstaffabominationrise' "},
+            {"default":"query.get_equipped_item_name('main_hand') == '' "},
+            {"AbominationRiseReload":"query.get_equipped_item_name('main_hand') == 'catstaff' && query.get_equipped_item_name('off_hand') == 'loadstaffabominationrise' && query.item_remaining_use_duration > 0.0"},
+            {"AbominationRise":"query.get_equipped_item_name('main_hand') == 'catstaff' && query.get_equipped_item_name('off_hand') == 'loadstaffabominationrise' && !query.is_sneaking"}
+          ],
+          "animations": [ "AbominationRiseCharge" ],
+          "on_entry": [ "/tell @p Charging Abomination Rise","/tag @s add AbominationRiseLowCharge" ],
+          "on_exit": [ "" ]
+        },
+        "AbominationFlowManipulation": {
+          "transitions": [ 
+            {"default":"query.get_equipped_item_name('off_hand') == '' "},
+            {"default":"query.get_equipped_item_name('off_hand') != 'loadstaffabominationflowmanipulation' "},
+            {"default":"query.get_equipped_item_name('main_hand') == '' "},
+            {"AbominationFlowManipulationReload":"query.get_equipped_item_name('main_hand') == 'catstaff' && query.get_equipped_item_name('off_hand') == 'loadstaffabominationflowmanipulation' && query.item_remaining_use_duration > 0.0"},
+            {"AbominationFlowManipulationCharge":"query.get_equipped_item_name('main_hand') == 'catstaff' && query.get_equipped_item_name('off_hand') == 'loadstaffabominationflowmanipulation' && query.is_sneaking"}
+          ],
+          "animations": [ "" ],
+          "on_entry": [ "/tell @p Abomination: Flow Manipulation Selected" ],
+          "on_exit": [ "" ]
+        },
+        "AbominationFlowManipulationReload": {
+          "transitions": [ 
+            {"default":"query.get_equipped_item_name('off_hand') == '' "},
+            {"default":"query.get_equipped_item_name('off_hand') != 'loadstaffabominationflowmanipulation' "},
+            {"default":"query.get_equipped_item_name('main_hand') == '' "},
+            {"AbominationFlowManipulation":"query.get_equipped_item_name('main_hand') == 'catstaff' && query.get_equipped_item_name('off_hand') == 'loadstaffabominationflowmanipulation' && !query.item_remaining_use_duration > 0.0"}
+          ],
+          "animations": [ "" ],
+          "on_entry": [ "/tell @p Casting Abomination Flow Manipulation", "/function staff/abomination/abominationflowmanipulation", "/function staff/abomination/abominationflowmanipulationreset" ],
+          "on_exit": [ "" ]
+        },
+        "AbominationFlowManipulationCharge": {
+          "transitions": [ 
+            {"default":"query.get_equipped_item_name('off_hand') == '' "},
+            {"default":"query.get_equipped_item_name('off_hand') != 'loadstaffabominationflowmanipulation' "},
+            {"default":"query.get_equipped_item_name('main_hand') == '' "},
+            {"AbominationFlowManipulationReload":"query.get_equipped_item_name('main_hand') == 'catstaff' && query.get_equipped_item_name('off_hand') == 'loadstaffabominationflowmanipulation' && query.item_remaining_use_duration > 0.0"},
+            {"AbominationFlowManipulation":"query.get_equipped_item_name('main_hand') == 'catstaff' && query.get_equipped_item_name('off_hand') == 'loadstaffabominationflowmanipulation' && !query.is_sneaking"}
+          ],
+          "animations": [ "AbominationFlowManipulationCharge" ],
+          "on_entry": [ "/tell @p Charging Abomination Flow Manipulation","/tag @s add FlowAbomination" ],
+          "on_exit": [ "/tag @s remove FlowAbomination" ]
+        },
+        "AbominationShield": {
+          "transitions": [ 
+            {"default":"query.get_equipped_item_name('off_hand') == '' "},
+            {"default":"query.get_equipped_item_name('off_hand') != 'loadstaffabominationshield' "},
+            {"default":"query.get_equipped_item_name('main_hand') == '' "},
+            {"AbominationShieldConjure":"query.get_equipped_item_name('main_hand') == 'catstaff' && query.get_equipped_item_name('off_hand') == 'loadstaffabominationshield' && query.item_remaining_use_duration > 0.0"}
+          ],
+          "animations": [ "" ],
+          "on_entry": [ "/tell @p Abomination Shield Selected" ],
+          "on_exit": [ "" ]
+        },
+        "AbominationShieldConjure": {
+          "transitions": [ 
+            {"default":"query.get_equipped_item_name('off_hand') == '' "},
+            {"default":"query.get_equipped_item_name('off_hand') != 'loadstaffabominationshield' "},
+            {"default":"query.get_equipped_item_name('main_hand') == '' "},
+            {"AbominationShield":"query.get_equipped_item_name('main_hand') == 'catstaff' && query.get_equipped_item_name('off_hand') == 'loadstaffabominationshield' && !query.item_remaining_use_duration > 0.0"}
+          ],
+          "animations": [ "AbominationShieldConjure" ],
+          "on_entry": [ "/tell @p Casting Abomination Shield"],
+          "on_exit": [ "" ]
+        },
+        "AbominationSpike": {
+          "transitions": [ 
+            {"default":"query.get_equipped_item_name('off_hand') == '' "},
+            {"default":"query.get_equipped_item_name('off_hand') != 'loadstaffabominationspike' "},
+            {"default":"query.get_equipped_item_name('main_hand') == '' "},
+            {"AbominationSpikeReload":"query.get_equipped_item_name('main_hand') == 'catstaff' && query.get_equipped_item_name('off_hand') == 'loadstaffabominationspike' && !query.is_sneaking && query.item_remaining_use_duration > 0.0"},
+            {"AbominationSpikeWaveReload":"query.get_equipped_item_name('main_hand') == 'catstaff' && query.get_equipped_item_name('off_hand') == 'loadstaffabominationspike' && query.is_sneaking && query.item_remaining_use_duration > 0.0"}
+          ],
+          "animations": [ "" ],
+          "on_entry": [ "/tell @p Abomination Blast Selected" ],
+          "on_exit": [ "" ]
+        },
+        "AbominationSpikeReload": {
+          "transitions": [ 
+            {"default":"query.get_equipped_item_name('off_hand') == '' "},
+            {"default":"query.get_equipped_item_name('off_hand') != 'loadstaffabominationspike' "},
+            {"default":"query.get_equipped_item_name('main_hand') == '' "},
+            {"AbominationSpike":"query.get_equipped_item_name('main_hand') == 'catstaff' && query.get_equipped_item_name('off_hand') == 'loadstaffabominationspike' && !query.item_remaining_use_duration > 0.0"}
+          ],
+          "animations": [ "" ],
+          "on_entry": [ "/tell @p Casting Abomination Blast", "/function staff/abomination/abominationspike", "/function staff/abomination/abominationspikereset" ],
+          "on_exit": [ "" ]
+        },
+        "AbominationSpikeWaveReload": {
+          "transitions": [ 
+            {"default":"query.get_equipped_item_name('off_hand') == '' "},
+            {"default":"query.get_equipped_item_name('off_hand') != 'loadstaffabominationspike' "},
+            {"default":"query.get_equipped_item_name('main_hand') == '' "},
+            {"AbominationSpikeWaveHold":"query.get_equipped_item_name('main_hand') == 'catstaff' && query.get_equipped_item_name('off_hand') == 'loadstaffabominationspike' && query.item_is_charged"}
+          ],
+          "animations": [ "" ],
+          "on_entry": [ "/tell @p Casting Abomination Blast", "/tag @s add AbominationSpikeWave", "/function staff/abomination/abominationspike", "/function staff/abomination/abominationspikereset" ],
+          "on_exit": [ "/tag @s remove AbominationSpikeWave" ]
+        },
+        "AbominationSpikeWaveHold": {
+          "transitions": [ 
+            {"default":"query.get_equipped_item_name('off_hand') == '' "},
+            {"default":"query.get_equipped_item_name('off_hand') != 'loadstaffabominationspike' "},
+            {"default":"query.get_equipped_item_name('main_hand') == '' "},
+            {"AbominationSpike":"query.get_equipped_item_name('main_hand') == 'catstaff' && query.get_equipped_item_name('off_hand') == 'loadstaffabominationspike' && !query.item_is_charged"}
+          ],
+          "animations": [ "" ],
+          "on_entry": [ "/tell @p Preparing Spike Wave" ],
+          "on_exit": [ "/tag @s remove AbominationSpikeWave", "/playanimation @s animation.humanoid.staff.cat.slash", "/effect @s resistance 2 255 true" ]
+        },
+        "AbominationTrap": {
+          "transitions": [ 
+            {"default":"query.get_equipped_item_name('off_hand') == '' "},
+            {"default":"query.get_equipped_item_name('off_hand') != 'loadstaffabominationtrap' "},
+            {"default":"query.get_equipped_item_name('main_hand') == '' "},
+            {"AbominationTrapReload":"query.get_equipped_item_name('main_hand') == 'catstaff' && query.get_equipped_item_name('off_hand') == 'loadstaffabominationtrap' && !query.is_sneaking && query.item_remaining_use_duration > 0.0"},
+            {"AbominationTrapBlowBubble":"query.get_equipped_item_name('main_hand') == 'catstaff' && query.get_equipped_item_name('off_hand') == 'loadstaffabominationtrap' && query.is_sneaking && query.item_remaining_use_duration > 0.0"}
+          ],
+          "animations": [ "" ],
+          "on_entry": [ "/tell @p Abomination Trap Selected" ],
+          "on_exit": [ "/function staff/abomination/abominationtrapmarker" ]
+        },
+        "AbominationTrapReload": {
+          "transitions": [ 
+            {"default":"query.get_equipped_item_name('off_hand') == '' "},
+            {"default":"query.get_equipped_item_name('off_hand') != 'loadstaffabominationtrap' "},
+            {"default":"query.get_equipped_item_name('main_hand') == '' "},
+            {"AbominationTrap":"query.get_equipped_item_name('main_hand') == 'catstaff' && query.get_equipped_item_name('off_hand') == 'loadstaffabominationtrap' && !query.item_remaining_use_duration > 0.0"}
+          ],
+          "animations": [ "" ],
+          "on_entry": [ "/function staff/abomination/abominationtrapmarker","/tell @p Casting Abomination Trap", "/function staff/abomination/abominationtrap", "/function staff/abomination/abominationtrapreset" ],
+          "on_exit": [ "/function staff/abomination/abominationtrapmarker" ]
+        },
+        "AbominationTrapBlowBubble": {
+          "transitions": [ 
+            {"default":"query.get_equipped_item_name('off_hand') == '' "},
+            {"default":"query.get_equipped_item_name('off_hand') != 'loadstaffabominationtrap' "},
+            {"default":"query.get_equipped_item_name('main_hand') == '' "},
+            {"AbominationTrap":"query.get_equipped_item_name('main_hand') == 'catstaff' && query.get_equipped_item_name('off_hand') == 'loadstaffabominationtrap' && query.item_is_charged"}
+          ],
+          "animations": [ "AbominationBubble" ],
+          "on_entry": [ "/tag @s add ControllAbominationBubble", "/function spells/abomination/abominationtrapcreateblow", "/tell @p Conjuring Bubble"],
+          "on_exit": [ "/tag @s remove ControllAbominationBubble" ]
+        }
+      }
+    }
+  }
+}

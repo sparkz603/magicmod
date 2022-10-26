@@ -1,0 +1,16 @@
+{
+	"format_version": "1.18.0",
+	"minecraft:item": {
+		"description": {
+			"identifier": "sp:abominationgrimoire"
+		},
+		"components": {
+			"minecraft:display_name": {
+				"value": "Grimoire"
+			},
+			"minecraft:icon": {
+				"texture": "stick"
+			}
+		}
+	}
+}
